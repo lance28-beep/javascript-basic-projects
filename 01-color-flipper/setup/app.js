@@ -15,7 +15,6 @@ btn.addEventListener('click', function () {
 //random numbers
 const randomNumbers = () => {
   const arr = []
-
   for (let i = 4; i >= arr.length; i--) {
     arr.push(Math.floor(Math.random() * 254))
   }
