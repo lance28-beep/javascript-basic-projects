@@ -2,38 +2,77 @@
 const reviews = [
   {
     id: 1,
-    name: "susan smith",
-    job: "web developer",
-    img:
-      "https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg",
-    text:
-      "I'm baby meggings twee health goth +1. Bicycle rights tumeric chartreuse before they sold out chambray pop-up. Shaman humblebrag pickled coloring book salvia hoodie, cold-pressed four dollar toast everyday carry",
+    name: 'susan smith',
+    job: 'web developer',
+    img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883334/person-1_rfzshl.jpg',
+    text: "I'm baby meggings twee health goth +1. Bicycle rights tumeric chartreuse before they sold out chambray pop-up. Shaman humblebrag pickled coloring book salvia hoodie, cold-pressed four dollar toast everyday carry",
   },
   {
     id: 2,
-    name: "anna johnson",
-    job: "web designer",
-    img:
-      "https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883409/person-2_np9x5l.jpg",
-    text:
-      "Helvetica artisan kinfolk thundercats lumbersexual blue bottle. Disrupt glossier gastropub deep v vice franzen hell of brooklyn twee enamel pin fashion axe.photo booth jean shorts artisan narwhal.",
+    name: 'anna johnson',
+    job: 'web designer',
+    img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883409/person-2_np9x5l.jpg',
+    text: 'Helvetica artisan kinfolk thundercats lumbersexual blue bottle. Disrupt glossier gastropub deep v vice franzen hell of brooklyn twee enamel pin fashion axe.photo booth jean shorts artisan narwhal.',
   },
   {
     id: 3,
-    name: "peter jones",
-    job: "intern",
-    img:
-      "https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883417/person-3_ipa0mj.jpg",
-    text:
-      "Sriracha literally flexitarian irony, vape marfa unicorn. Glossier tattooed 8-bit, fixie waistcoat offal activated charcoal slow-carb marfa hell of pabst raclette post-ironic jianbing swag.",
+    name: 'peter jones',
+    job: 'intern',
+    img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883417/person-3_ipa0mj.jpg',
+    text: 'Sriracha literally flexitarian irony, vape marfa unicorn. Glossier tattooed 8-bit, fixie waistcoat offal activated charcoal slow-carb marfa hell of pabst raclette post-ironic jianbing swag.',
   },
   {
     id: 4,
-    name: "bill anderson",
-    job: "the boss",
-    img:
-      "https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883423/person-4_t9nxjt.jpg",
-    text:
-      "Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ",
+    name: 'bill anderson',
+    job: 'the boss',
+    img: 'https://res.cloudinary.com/diqqf3eq2/image/upload/v1586883423/person-4_t9nxjt.jpg',
+    text: 'Edison bulb put a bird on it humblebrag, marfa pok pok heirloom fashion axe cray stumptown venmo actually seitan. VHS farm-to-table schlitz, edison bulb pop-up 3 wolf moon tote bag street art shabby chic. ',
   },
-];
+]
+
+// factory function
+
+const UIreviews = ({ id, name, job, img, text }) => {
+  const personImage = document.getElementById('person-img')
+  const author = document.getElementById('author')
+  const jobPosition = document.getElementsByClassName('job')
+  const jobDescription = document.getElementById('info')
+  personImage.src = img
+  author.textContent = name
+  jobPosition.textContent = job
+  jobDescription.textContent = text
+  jobDescription.classList.add = id
+}
+
+//buttons
+const buttons = document.querySelectorAll('button')
+let currentPage = 0
+buttons.forEach((button) => {
+  button.addEventListener('click', function (e) {
+    pagesCount(e.currentTarget.classList.value)
+    UIreviews(reviews[currentPage])
+  })
+})
+
+const pagesCount = (btnClick) => {
+  switch (btnClick) {
+    case 'prev-btn':
+      if (currentPage <= reviews.length - 1) {
+        currentPage--
+      }
+      if (currentPage <= -1) {
+        currentPage = reviews.length - 1
+      }
+      break
+    case 'next-btn':
+      if (currentPage < reviews.length) {
+        currentPage++
+      }
+      if (currentPage >= reviews.length) {
+        currentPage = 0
+      }
+      break
+    default:
+      currentPage = Math.floor(Math.random() * reviews.length)
+  }
+}
